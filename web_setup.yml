@@ -1,0 +1,54 @@
+
+  - name: configurar servidor web
+    hosts: webserver
+    become: yes
+    tasks:
+      - name: instalar apache
+        package:
+          name: httpd
+          state: present
+
+       
+      - name: crea virtualhost para www.ejemplo.com.uy
+        copy:
+          dest: /etc/httpd/conf.d/www.ejemplo.com.uy.conf
+          content: |
+             <VirtualHost *:80>
+
+                 ServerName www.ejemplo.com.uy
+                 DocumentRoot /var/www/html
+
+                 <Directory /var/www/html>
+                    AllowOverride none
+                    Requiere all granted
+                </Directory>
+
+             </VirtualHost>
+
+      - name: Asegurar que el firewall permite trafico HTTP
+        shell: firewall-cmd --permanent --add-service=http && firewall-cmd --reload
+
+      - name: Desplegar archivo index.html personalizado
+        copy:
+          dest: /var/www/html/index.html
+          content: |
+            <html>
+            <head><title>CENTOS</title></head>
+            <body>
+              <h1>Servidor: {{ ansible_hostname }}</h1>
+                <p>IP: {{ ansible_facts['enp0s8']['ipv4']['address'] }}</p>
+            </body>
+            </html>
+        notify: Reiniciar Apache
+
+      - name: habilitar apache en el arranque
+        service:
+          name: httpd
+          enabled: true    
+          state: started
+
+    handlers:
+      - name: Reiniciar Apache
+        service:
+          name: httpd
+          state: restarted
