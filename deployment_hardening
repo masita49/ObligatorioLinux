@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Definir el directorio donde se encuentra el playbook
+
+PLAYBOOK_PATH="/home/sysadmin/ansible/hardening.yml"
+
+
+#Definir el inventario de hosts
+
+INVENTORY_PATH="/home/sysadmin/ansible/inventory.ini"
+
+ansible-playbook -i "$INVENTORY_PATH" "$PLAYBOOK_PATH"
