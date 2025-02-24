@@ -1,4 +1,4 @@
-
+---
   - name: configurar servidor web
     hosts: webserver
     become: yes
@@ -52,3 +52,4 @@
         service:
           name: httpd
           state: restarted
+...
