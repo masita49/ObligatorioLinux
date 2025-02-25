@@ -1,0 +1,7 @@
+Durante el desarrollo y la implementación del playbook, nos enfrentamos a varios desafíos. Uno de los principales fue asegurarnos de que las configuraciones se
+aplicaran de manera correcta y consistente en entornos reales, especialmente al gestionar las reglas del firewall con ufw y al configurar la autenticación mediante
+claves públicas en SSH. La integración de lógica condicional en Ansible para adaptarse a distintas distribuciones y configuraciones específicas también requirió
+atención, ya que cada sistema puede comportarse de manera ligeramente diferente. Además, interpretar y resolver los mensajes de error—como aquellos que
+surgieron al reiniciar Apache debido a problemas en el VirtualHost—fue crucial para ajustar la configuración y garantizar un entorno seguro. Estos desafíos reforzaron
+la importancia de combinar el conocimiento teórico de automatización con una comprensión práctica de la administración de sistemas para lograr una infraestructura
+robusta y bien protegida.
